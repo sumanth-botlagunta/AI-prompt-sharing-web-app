@@ -1,5 +1,7 @@
 import '@styles/globals.css';
 
+import Nav from '@components/Nav';
+
 export const metadata = {
   title: 'Prompt Infinity',
   description: 'Discover & Share AI prompts',
@@ -11,7 +13,10 @@ const Rootlayout = ({ children }) => {
         <div className="main">
           <div className="gradient"></div>
         </div>
-        <main className="app">{children}</main>
+        <main className="app">
+          <Nav />
+          {children}
+        </main>
       </body>
     </html>
   );
