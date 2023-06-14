@@ -34,9 +34,9 @@ const NavButtons = () => {
             src={session?.user.image}
             width={37}
             height={37}
-            className="rounded-full"
+            className="rounded-full hover:cursor-pointer"
             alt="profile"
-            onClick={() => setToggleDropdown(!toggleDropdown)}
+            onClick={() => setToggleDropdown((prev) => !prev)}
           />
 
           {toggleDropdown && (
