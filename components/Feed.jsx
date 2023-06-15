@@ -1,7 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
 
-import PromptCard from '@components/PromptCard';
+import { useState, useEffect } from 'react';
+
+import PromptCard from './PromptCard';
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
@@ -18,15 +19,18 @@ const PromptCardList = ({ data, handleTagClick }) => {
 };
 
 const Feed = () => {
-  const [allposts, setAllposts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
+
+  // Search states
   const [searchText, setSearchText] = useState('');
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
   const fetchPosts = async () => {
-    const response = await fetch('api/prompt');
+    const response = await fetch('/api/prompt');
     const data = await response.json();
-    setAllposts(data);
+
+    setAllPosts(data);
   };
 
   useEffect(() => {
@@ -35,7 +39,7 @@ const Feed = () => {
 
   const filterPrompts = (searchtext) => {
     const regex = new RegExp(searchtext, 'i'); // 'i' flag for case-insensitive search
-    return allposts.filter(
+    return allPosts.filter(
       (item) =>
         regex.test(item.creator.username) ||
         regex.test(item.tag) ||
@@ -68,20 +72,22 @@ const Feed = () => {
       <form className="relative w-full flex-center">
         <input
           type="text"
-          placeholder="Search for a #tag or username"
+          placeholder="Search for a tag or a username"
           value={searchText}
-          required
           onChange={handleSearchChange}
+          required
           className="search_input peer"
         />
       </form>
+
+      {/* All Prompts */}
       {searchText ? (
         <PromptCardList
           data={searchedResults}
           handleTagClick={handleTagClick}
         />
       ) : (
-        <PromptCardList data={allposts} handleTagClick={handleTagClick} />
+        <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
       )}
     </section>
   );
