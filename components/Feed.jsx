@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 
 import PromptCard from './PromptCard';
-import { data } from 'autoprefixer';
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
@@ -30,13 +29,13 @@ const Feed = () => {
   const fetchPosts = async () => {
     const response = await fetch('/api/prompt');
     const data = await response.json();
-    return data;
+
+    setAllPosts(data);
   };
 
-  (async function () {
-    const data = await fetchPosts();
-    setAllPosts(data);
-  })();
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   const filterPrompts = (searchtext) => {
     const regex = new RegExp(searchtext, 'i'); // 'i' flag for case-insensitive search
