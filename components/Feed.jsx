@@ -20,7 +20,9 @@ const PromptCardList = ({ data, handleTagClick }) => {
 };
 
 const fetchPosts = async () => {
-  const response = await fetch('/api/prompt', { cache: 'no-store' });
+  const response = await fetch(`${process.env.NEXTAUTH_URL}/api/prompt`, {
+    cache: 'no-store',
+  });
   const data = await response.json();
   return data;
 };
