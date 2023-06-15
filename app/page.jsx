@@ -1,4 +1,3 @@
-'use client';
 import Feed from '@components/Feed';
 import Hero from '@components/Hero';
 
