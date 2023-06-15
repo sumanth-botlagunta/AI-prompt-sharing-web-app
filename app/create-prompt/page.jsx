@@ -13,7 +13,8 @@ const CreatePrompt = () => {
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({ prompt: '', tag: '' });
 
-  const currdate = stringify(Date.now());
+  const currdate = new Date();
+  const stringdate = currdate.toString();
 
   const CreatePrompt = async (e) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ const CreatePrompt = () => {
         }),
       });
       if (response.ok) {
-        router.push(`/?upated=${currdate}`);
+        router.push(`/?upated=${stringdate}`);
       }
     } catch (error) {
       console.error(error);
