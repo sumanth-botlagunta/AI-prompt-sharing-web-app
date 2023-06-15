@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 import Form from '@components/Form';
+import { stringify } from 'postcss';
 
 const CreatePrompt = () => {
   const router = useRouter();
@@ -11,6 +12,8 @@ const CreatePrompt = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({ prompt: '', tag: '' });
+
+  const currdate = stringify(Date.now());
 
   const CreatePrompt = async (e) => {
     e.preventDefault();
@@ -25,7 +28,7 @@ const CreatePrompt = () => {
         }),
       });
       if (response.ok) {
-        router.push('/');
+        router.push(`/?upated=${currdate}`);
       }
     } catch (error) {
       console.error(error);

@@ -1,5 +1,5 @@
 'use client';
-
+import { useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 import PromptCard from './PromptCard';
@@ -33,9 +33,13 @@ const Feed = () => {
     setAllPosts(data);
   };
 
+  const searchParams = useSearchParams();
+
+  const updated = searchParams.get('upated') || '';
+
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [updated]);
 
   const filterPrompts = (searchtext) => {
     const regex = new RegExp(searchtext, 'i'); // 'i' flag for case-insensitive search
