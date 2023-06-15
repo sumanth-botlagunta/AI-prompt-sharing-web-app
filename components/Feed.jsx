@@ -19,19 +19,17 @@ const PromptCardList = ({ data, handleTagClick }) => {
   );
 };
 
-const fetchPosts = async () => {
-  const response = await fetch(`${process.env.NEXTAUTH_URL}/api/prompt`, {
-    cache: 'no-store',
-  });
-  const data = await response.json();
-  return data;
-};
-
 const Feed = async () => {
   // Search states
   const [searchText, setSearchText] = useState('');
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
+
+  const fetchPosts = async () => {
+    const response = await fetch('/api/prompt', { cache: 'no-store' });
+    const data = await response.json();
+    return data;
+  };
 
   const filterPrompts = (searchtext) => {
     const regex = new RegExp(searchtext, 'i'); // 'i' flag for case-insensitive search
